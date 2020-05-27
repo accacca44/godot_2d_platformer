@@ -6,15 +6,18 @@ const MAX_SPEED = 1000
 const JUMP_FORCE = -250
 const FLOOR = Vector2(0,-1)
 const MAX_JUMPS = 1
+const FIREBALL = preload("res://Fireball.tscn")
 
-var vel = Vector2() 
+var vel = Vector2()
 var jumps_left 
-
+var is_shooting = false
 
 func get_input_from_user():
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_just_pressed("ui_up")
+	var shoot = Input.is_action_just_pressed("shoot_fireball")
+
 	
 	if jump:
 		if jumps_left > 0:
@@ -23,12 +26,31 @@ func get_input_from_user():
 	
 	if right:
 		vel.x = SPEED
-		$HerosSprite.flip_h = false
-		$HerosSprite.play("walk")
+		if !is_shooting:
+			$HerosSprite.flip_h = false
+			$HerosSprite.play("walk")
+			if sign($FireballSpawn.position.x) == -1:
+				$FireballSpawn.position.x *= -1
+		
 	elif left:
 		vel.x = -SPEED
-		$HerosSprite.flip_h = true
-		$HerosSprite.play("walk")
+		if !is_shooting:
+			$HerosSprite.flip_h = true
+			$HerosSprite.play("walk")
+			if sign($FireballSpawn.position.x) == 1:
+				$FireballSpawn.position.x *= -1
+
+		
+	if shoot and !is_shooting:
+		is_shooting = true
+		$HerosSprite.play("shoot")
+		var ball = FIREBALL.instance()
+		if sign($FireballSpawn.position.x) == 1:
+			ball.set_dir(1)
+		else:
+			ball.set_dir(-1)
+		get_parent().add_child(ball)
+		ball.position = $FireballSpawn.global_position
 
 
 
@@ -36,7 +58,7 @@ func _physics_process(delta):
 	vel.x = 0
 	get_input_from_user()
 
-	if vel.x == 0 or is_on_wall():
+	if (vel.x == 0 or is_on_wall()) and !is_shooting:
 		$HerosSprite.play("idle")
 	#gravity
 	vel.y += GRAVITY
@@ -46,7 +68,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		jumps_left = MAX_JUMPS 
 		
-	else:
+	elif !is_shooting:
 		if vel.y > GRAVITY:
 			$HerosSprite.stop()
 			$HerosSprite.play("fall")
@@ -60,3 +82,7 @@ func _physics_process(delta):
 
 
 
+
+
+func _on_HerosSprite_animation_finished():
+	is_shooting = false

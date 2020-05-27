@@ -1,12 +1,18 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Textures/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile024.png" type="Texture" id=1]
+[ext_resource path="res://Resources/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile033.png" type="Texture" id=1]
 [ext_resource path="res://Hero.gd" type="Script" id=2]
-[ext_resource path="res://Textures/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile026.png" type="Texture" id=3]
-[ext_resource path="res://Textures/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile025.png" type="Texture" id=4]
-[ext_resource path="res://Textures/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile023.png" type="Texture" id=5]
-[ext_resource path="res://Textures/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile029.png" type="Texture" id=6]
-[ext_resource path="res://Textures/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile027.png" type="Texture" id=8]
+[ext_resource path="res://Resources/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile027.png" type="Texture" id=3]
+[ext_resource path="res://Resources/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile026.png" type="Texture" id=4]
+[ext_resource path="res://Resources/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile023.png" type="Texture" id=5]
+[ext_resource path="res://Resources/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile025.png" type="Texture" id=6]
+[ext_resource path="res://Resources/ezgif-3-924ff5f3d73b-png-32x32-sprite-png/tile024.png" type="Texture" id=7]
+[ext_resource path="res://tile036/Layer 1_sprite_shoot3.png" type="Texture" id=8]
+[ext_resource path="res://tile036/Layer 1_sprite_shoot6.png" type="Texture" id=9]
+[ext_resource path="res://tile036/Layer 1_sprite_shoot5.png" type="Texture" id=10]
+[ext_resource path="res://tile036/Layer 1_sprite_shoot4.png" type="Texture" id=11]
+[ext_resource path="res://tile036/Layer 1_sprite_shoot2.png" type="Texture" id=12]
+[ext_resource path="res://tile036/Layer 1_sprite_shoot1.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 11 )
@@ -18,28 +24,29 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "walk",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "jump",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "shoot",
+"speed": 18.0
+}, {
+"frames": [ ExtResource( 1 ) ],
 "loop": false,
 "name": "fall",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
 } ]
 
 [node name="Hero" type="KinematicBody2D"]
-position = Vector2( 59, 21 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 5 )
@@ -47,5 +54,10 @@ shape = SubResource( 1 )
 
 [node name="HerosSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "idle"
+animation = "walk"
+frame = 2
 playing = true
+
+[node name="FireballSpawn" type="Position2D" parent="."]
+position = Vector2( 8, 8 )
+[connection signal="animation_finished" from="HerosSprite" to="." method="_on_HerosSprite_animation_finished"]
