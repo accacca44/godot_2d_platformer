@@ -46,18 +46,30 @@ animations = [ {
 } ]
 
 [node name="Hero" type="KinematicBody2D"]
+z_index = 1
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 5 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="HerosSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "walk"
-frame = 2
+frame = 1
 playing = true
 
 [node name="FireballSpawn" type="Position2D" parent="."]
 position = Vector2( 8, 8 )
+z_index = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 1, 0 )
+scale = Vector2( 10, 1 )
+z_index = 1
+enabled = true
+cast_to = Vector2( 0, 17 )
+collision_mask = 2
 [connection signal="animation_finished" from="HerosSprite" to="." method="_on_HerosSprite_animation_finished"]
