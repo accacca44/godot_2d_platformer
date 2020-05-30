@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Resources/fonts/pixelartfont_16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/ezgif-2-11d30a26197c-png-32x32-sprite-png/tile002.png" type="Texture" id=2]
+[ext_resource path="res://Resources/ezgif-2-11d30a26197c-png-32x32-sprite-png/tile001.png" type="Texture" id=3]
+[ext_resource path="res://Resources/ezgif-2-11d30a26197c-png-32x32-sprite-png/tile003.png" type="Texture" id=4]
+[ext_resource path="res://Resources/ezgif-2-11d30a26197c-png-32x32-sprite-png/tile000.png" type="Texture" id=5]
+
+[sub_resource type="AnimatedTexture" id=1]
+flags = 4
+frames = 4
+fps = 12.0
+frame_0/texture = ExtResource( 5 )
+frame_1/texture = ExtResource( 3 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 2 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 4 )
+frame_3/delay_sec = 0.0
+
+[node name="MenuButton" type="Button"]
+margin_right = 276.0
+margin_bottom = 20.0
+icon = SubResource( 1 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.00784314, 0.00392157, 0.00392157, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.721569, 0.662745, 0.694118, 1 )
+custom_constants/shadow_offset_y = 2
+text = "        LABEL"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

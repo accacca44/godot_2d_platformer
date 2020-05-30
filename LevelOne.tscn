@@ -2,27 +2,18 @@
 
 [ext_resource path="res://Hero.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Platform.tres" type="TileSet" id=2]
-[ext_resource path="res://EnemyOne.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Snake.tscn" type="PackedScene" id=3]
 
 [node name="Level_Overworld" type="Node2D"]
-
-[node name="EnemyOne" parent="." instance=ExtResource( 3 )]
-position = Vector2( 152, 16 )
-
-[node name="EnemyOne2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 264, 96 )
-
-[node name="EnemyOne4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 128, 152 )
-
-[node name="EnemyOne3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 216, 160 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 131081, 8, 0, 131082, 8, 0, 131083, 8, 0, 262156, 8, 0, 262157, 8, 0, 262158, 8, 0, 262159, 8, 0, 327680, 9, 0, 327682, 3, 0, 327683, 8, 0, 327684, 8, 0, 327685, 9, 0, 393216, 15, 0, 458752, 15, 0, 458768, 3, 0, 458769, 8, 0, 458770, 8, 0, 524288, 15, 0, 524304, 10, 0, 524305, 14, 0, 524306, 14, 0, 589824, 15, 0, 589833, 1, 0, 589834, 1, 0, 589835, 1, 0, 589836, 1, 0, 655360, 15, 0, 655369, 14, 0, 655370, 14, 0, 655371, 14, 0, 655372, 14, 0, 655380, 8, 0, 720896, 8, 0, 720897, 8, 0, 720898, 8, 0, 720899, 8, 0, 720900, 8, 0, 720901, 8, 0, 720902, 8, 0, 720903, 8, 0, 720904, 8, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 720917, 1, 0, 720918, 1, 0, 720919, 1, 0, 720920, 1, 0, 720921, 1, 0, 720922, 14, 0 )
+tile_data = PoolIntArray( 393216, 8, 0, 393217, 9, 0, 458752, 14, 0, 458753, 15, 0, 458758, 6, 0, 458759, 8, 0, 458760, 7, 0, 458770, 4, 0, 524288, 14, 0, 524289, 14, 0, 524290, 7, 0, 524294, 10, 0, 524295, 13, 0, 524296, 15, 0, 524306, 12, 0, 589824, 14, 0, 589825, 14, 0, 589826, 15, 0, 589830, 10, 0, 589831, 13, 0, 589832, 15, 0, 589842, 12, 0, 655360, 14, 0, 655361, 14, 0, 655362, 15, 0, 655366, 10, 0, 655367, 13, 0, 655368, 15, 0, 655371, 3, 0, 655372, 8, 0, 655373, 8, 0, 655374, 9, 0, 655378, 12, 0, 786430, 0, 0, 786431, 0, 0, 720896, 2, 0, 720897, 1, 0, 720898, 1, 0, 720899, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 8, 0, 720903, 8, 0, 720904, 2, 0, 720905, 2, 0, 720906, 1, 0, 720907, 1, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 1, 0, 720913, 1, 0, 720914, 0, 0, 720915, 0, 0, 720916, 0, 0, 720917, 0, 0 )
 
-[node name="Hero" parent="." instance=ExtResource( 1 )]
-position = Vector2( 48, 160 )
+[node name="Snake" parent="TileMap" instance=ExtResource( 3 )]
+position = Vector2( 208, 136 )
+
+[node name="Hero" parent="TileMap" instance=ExtResource( 1 )]
+position = Vector2( 72, 144 )

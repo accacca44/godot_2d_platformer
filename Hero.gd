@@ -17,8 +17,12 @@ func get_input_from_user():
 	var left = Input.is_action_pressed("ui_left")
 	var jump = Input.is_action_just_pressed("ui_up")
 	var shoot = Input.is_action_just_pressed("shoot_fireball")
-
+	var exit = Input.is_action_just_pressed("quit_game")
 	
+	if exit:
+		get_tree().change_scene("res://TitleScreen.tscn")
+		
+		
 	if jump:
 		if jumps_left > 0:
 			vel.y = JUMP_FORCE
@@ -76,13 +80,15 @@ func _physics_process(delta):
 		if vel.y < 0:
 			$HerosSprite.stop()
 			$HerosSprite.play("jump")
+	#jumpkill
+	if $RayCast2D.is_colliding() == true:
+		$RayCast2D.get_collider().kill()
+		vel.y = -SPEED*3
+		jumps_left = 0
 	#actually moving
 	vel = move_and_slide(vel,FLOOR)
-	
-
-
-
-
 
 func _on_HerosSprite_animation_finished():
 	is_shooting = false
+
+
